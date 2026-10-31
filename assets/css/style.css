@@ -1,0 +1,458 @@
+/* ==========================================================================
+   Karmic Genie (Dharma Gramam) — Unified Shell & Spiritual-Civic Design System
+   Inherits GuruKulaDesam Left-Strip Sanctuary Shell + shishyan.in Clean UI
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Mukta+Malar:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --strip-collapsed-width: 64px;
+  --strip-expanded-width: 285px;
+  --strip-speed: 0.25s;
+
+  --bg-dark: #020813;
+  --bg-surface: rgba(8, 22, 38, 0.85);
+  --bg-card: rgba(11, 25, 44, 0.84);
+  --bg-card-hover: rgba(15, 34, 58, 0.94);
+  --bg-glass: rgba(6, 18, 32, 0.88);
+  --border-subtle: rgba(45, 212, 191, 0.22);
+  --border-gold: rgba(245, 158, 11, 0.40);
+  --teal: #14b8a6;
+  --teal-bright: #2dd4bf;
+  --gold: #f59e0b;
+  --gold-bright: #fbbf24;
+  --blue-cyan: #38bdf8;
+  --emerald: #10b981;
+  --crimson: #ef4444;
+  --violet: #a855f7;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --font-scale: 1;
+}
+
+html.theme-palmleaf {
+  --bg-dark: #1c160d;
+  --bg-surface: rgba(42, 32, 18, 0.90);
+  --bg-card: rgba(48, 37, 21, 0.88);
+  --bg-card-hover: rgba(62, 48, 28, 0.95);
+  --border-subtle: rgba(217, 119, 6, 0.32);
+  --border-gold: rgba(251, 191, 36, 0.50);
+  --teal-bright: #fbbf24;
+  --text-main: #fef3c7;
+  --text-muted: #d6c3a5;
+}
+
+html.theme-light {
+  --bg-dark: #f1f5f9;
+  --bg-surface: rgba(255, 255, 255, 0.94);
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fafc;
+  --border-subtle: #cbd5e1;
+  --border-gold: #f59e0b;
+  --teal-bright: #0d9488;
+  --gold-bright: #d97706;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', 'Mukta Malar', system-ui, sans-serif;
+  font-size: calc(16px * var(--font-scale));
+  background-color: var(--bg-dark);
+  background-image:
+    radial-gradient(ellipse 85% 50% at 15% 10%, rgba(20, 184, 166, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 75% 55% at 85% 15%, rgba(245, 158, 11, 0.14) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 50% at 50% 85%, rgba(16, 185, 129, 0.14) 0%, transparent 65%);
+  background-attachment: fixed;
+  color: var(--text-main);
+  min-height: 100vh;
+  padding-left: var(--strip-collapsed-width);
+  transition: padding-left var(--strip-speed) ease, background-color 0.25s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.strip-expanded {
+  padding-left: var(--strip-expanded-width);
+}
+
+@media (max-width: 768px) {
+  body, body.strip-expanded {
+    padding-left: 0 !important;
+  }
+}
+
+/* ==========================================================================
+   SVG ICON SYSTEM (.gkd-icon) — Zero Raw Emoji Invariant
+   ========================================================================== */
+.gkd-icon {
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: -0.18em;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   LEFT STRIP BAR (GURUKULADESAM GLOBAL SHELL)
+   ========================================================================== */
+.left-strip-bar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: var(--strip-collapsed-width);
+  background: linear-gradient(180deg, #021a14 0%, #032b21 38%, #053b2c 75%, #01140f 100%);
+  border-right: 1.5px solid rgba(45, 212, 191, 0.35);
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  transition: width var(--strip-speed) cubic-bezier(0.4, 0, 0.2, 1), transform var(--strip-speed) ease;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.65);
+  overflow-x: hidden;
+  overflow-y: auto;
+  user-select: none;
+}
+
+body.strip-expanded .left-strip-bar {
+  width: var(--strip-expanded-width);
+}
+
+@media (max-width: 768px) {
+  .left-strip-bar {
+    transform: translateX(-100%);
+    width: var(--strip-expanded-width);
+  }
+  body.strip-expanded .left-strip-bar {
+    transform: translateX(0);
+  }
+}
+
+.strip-header {
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  border-bottom: 1px solid rgba(45, 212, 191, 0.22);
+  flex-shrink: 0;
+}
+
+body:not(.strip-expanded) .strip-brand-link {
+  display: none;
+}
+
+body:not(.strip-expanded) .strip-header {
+  justify-content: center;
+  padding: 0;
+}
+
+.strip-brand-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #f8fafc;
+}
+
+.strip-emblem {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(245, 158, 11, 0.16);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fbbf24;
+}
+
+.strip-toggle-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(45, 212, 191, 0.30);
+  color: #e2e8f0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.strip-toggle-btn:hover {
+  background: rgba(45, 212, 191, 0.22);
+  color: #2dd4bf;
+}
+
+.strip-nav-list {
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+}
+
+.strip-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 11px;
+  color: #cbd5e1;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+body:not(.strip-expanded) .strip-item {
+  justify-content: center;
+  padding: 10px 0;
+}
+
+body:not(.strip-expanded) .strip-item-label,
+body:not(.strip-expanded) .strip-item-badge,
+body:not(.strip-expanded) .strip-footer-info {
+  display: none;
+}
+
+.strip-item:hover {
+  background: rgba(45, 212, 191, 0.14);
+  color: #ffffff;
+  border-color: rgba(45, 212, 191, 0.28);
+}
+
+.strip-item.active {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.24) 0%, rgba(20, 184, 166, 0.22) 100%);
+  color: #fbbf24;
+  border-color: rgba(245, 158, 11, 0.55);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+.strip-item-icon {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2dd4bf;
+}
+
+.strip-item.active .strip-item-icon {
+  color: #fbbf24;
+}
+
+.strip-item-badge {
+  margin-left: auto;
+  font-size: 0.7rem;
+  padding: 2px 7px;
+  border-radius: 99px;
+  background: rgba(45, 212, 191, 0.18);
+  color: #2dd4bf;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   TOP CONTEXT BAR (GURUKULADESAM + SHISHYAN.IN HEADER)
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.header-context-bar {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.context-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.context-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.crumb-domain-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 11px;
+  border-radius: 99px;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: var(--gold-bright);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.header-right-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.context-tool-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 11px;
+  border-radius: 9px;
+  background: rgba(30, 41, 59, 0.75);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.context-tool-btn:hover, .context-tool-btn.active {
+  border-color: var(--gold-bright);
+  color: var(--gold-bright);
+  background: rgba(245, 158, 11, 0.14);
+}
+
+/* ==========================================================================
+   CARDS, HERO & CIVIC WIDGETS
+   ========================================================================== */
+.main-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 22px 20px 80px 20px;
+}
+
+.hero-card {
+  background: linear-gradient(135deg, rgba(9, 25, 45, 0.92) 0%, rgba(18, 38, 58, 0.85) 100%);
+  border: 1px solid var(--border-gold);
+  border-radius: 20px;
+  padding: 26px 24px;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
+  margin-bottom: 22px;
+}
+
+.emblem-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--gold-bright);
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  padding: 4px 14px;
+  border-radius: 99px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+
+.gkd-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.gkd-card:hover {
+  border-color: rgba(45, 212, 191, 0.42);
+}
+
+.gkd-card.gold-border {
+  border-color: var(--border-gold);
+}
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #000000;
+  font-weight: 700;
+  font-size: 0.82rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.45);
+}
+
+.btn-teal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 10px;
+  background: rgba(20, 184, 166, 0.18);
+  border: 1px solid rgba(45, 212, 191, 0.45);
+  color: var(--teal-bright);
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-teal:hover {
+  background: rgba(20, 184, 166, 0.28);
+  transform: translateY(-1px);
+}
+
+.hash-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: rgba(15, 23, 42, 0.8);
+  border-radius: 99px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #14b8a6 0%, #f59e0b 100%);
+  border-radius: 99px;
+  transition: width 0.35s ease;
+}

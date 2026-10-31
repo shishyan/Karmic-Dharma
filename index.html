@@ -1,714 +1,462 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Karmic Genie — Proof-of-Dharma & Civic Prestige Ledger</title>
+  <title>Karmic Genie | Dharma Gramam Open Ledger • genie.shishyan.in</title>
+  <meta name="description" content="Karmic Genie (genie.shishyan.in) — An End-to-End Dharma Town Operating System where daily priorities, Top 10 Citizen Boons, and all Town Stewardship Positions are voted by all people, rewarding only verified Dharma (Dana & Seva).">
+  <link rel="canonical" href="https://genie.shishyan.in/">
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      background-color: #0b0f17;
-      color: #f1f5f9;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
-    .card-surface {
-      background: linear-gradient(145deg, #131b2e 0%, #0f1523 100%);
-      border: 1px solid #1e293b;
-    }
-    .gold-glow {
-      box-shadow: 0 0 25px rgba(245, 158, 11, 0.15);
-      border-color: rgba(245, 158, 11, 0.45);
-    }
-    .tab-active {
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-      color: #000000;
-      font-weight: 700;
-    }
-    .hash-mono {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    }
-  </style>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="antialiased p-4 md:p-6 max-w-7xl mx-auto">
+<body>
 
-  <!-- TOP HEADER -->
-  <header class="card-surface gold-glow rounded-2xl p-5 mb-6">
-    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-      <div>
-        <div class="flex items-center gap-2 mb-1">
-          <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30">
-            🧞‍♂️ KARMIC GENIE PROTOCOL • PROOF-OF-DHARMA (PoD)
-          </span>
-          <span class="text-xs text-emerald-400 font-semibold">● SHA-256 Verified</span>
+  <!-- ========================================================================
+       LEFT STRIP BAR (GURUKULADESAM GLOBAL SANCTUARY SHELL)
+       ======================================================================== -->
+  <aside class="left-strip-bar" id="leftStripBar" aria-label="Karmic Genie Primary Navigation">
+    <div class="strip-header">
+      <a href="index.html" class="strip-brand-link" title="Karmic Genie • genie.shishyan.in">
+        <span class="strip-emblem">
+          <svg class="gkd-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="21"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="5.6" y1="5.6" x2="18.4" y2="18.4"/><line x1="18.4" y1="5.6" x2="5.6" y2="18.4"/></svg>
+        </span>
+        <div style="display:flex; flex-direction:column;">
+          <span style="font-size:0.95rem; font-weight:800; color:#f8fafc;">Karmic Genie</span>
+          <span style="font-size:0.68rem; color:#2dd4bf; font-weight:600;">genie.shishyan.in</span>
         </div>
-        <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-white">
-          Karmic Genie: The Dharma-Driven Open Ledger
-        </h1>
-        <p class="text-sm text-slate-400 mt-1">
-          Where <strong class="text-amber-400">Respect, Fame & Civic Status</strong> cannot be bought or hoarded—they can ONLY be earned by verified <strong class="text-emerald-400">Dāna (Giving)</strong> & <strong class="text-emerald-400">Seva (Service)</strong>.
-        </p>
-      </div>
-
-      <!-- Scale & Currency Switchers -->
-      <div class="flex flex-wrap items-center gap-2">
-        <div class="bg-slate-900 border border-slate-700 rounded-lg p-1 flex text-xs font-semibold">
-          <button onclick="setScale('TOWN')" id="scale-TOWN" class="px-3 py-1.5 rounded-md tab-active transition">1. Town</button>
-          <button onclick="setScale('CITY')" id="scale-CITY" class="px-3 py-1.5 rounded-md text-slate-400 transition">2. City</button>
-          <button onclick="setScale('STATE')" id="scale-STATE" class="px-3 py-1.5 rounded-md text-slate-400 transition">3. State</button>
-          <button onclick="setScale('COUNTRY')" id="scale-COUNTRY" class="px-3 py-1.5 rounded-md text-slate-400 transition">4. Country</button>
-        </div>
-      </div>
+      </a>
+      <button type="button" class="strip-toggle-btn" onclick="toggleLeftStrip()" title="Expand / Collapse Sanctuary Menu">
+        <svg class="gkd-icon" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
     </div>
 
-    <!-- Top KPI Strip -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5 pt-4 border-t border-slate-800">
-      <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3">
-        <div class="text-xs text-slate-400">Active Jurisdiction</div>
-        <div id="kpi-scale" class="text-base font-bold text-white mt-0.5">Model Dharma Town #01</div>
-        <div id="kpi-pop" class="text-xs text-emerald-400 mt-0.5">25,000 Citizens On-Chain</div>
+    <nav class="strip-nav-list">
+      <button type="button" id="strip-nav-overview" onclick="switchSection('overview')" class="strip-item active" title="1. Dharma Fame Leaderboard & Anti-Hoarding">
+        <span class="strip-item-icon">
+          <svg class="gkd-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </span>
+        <span class="strip-item-label">1. Dharma Leaderboard</span>
+        <span class="strip-item-badge">Fame</span>
+      </button>
+
+      <button type="button" id="strip-nav-polls" onclick="switchSection('polls')" class="strip-item" title="2. Daily Public Priority Polling">
+        <span class="strip-item-icon">
+          <svg class="gkd-icon" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </span>
+        <span class="strip-item-label">2. Daily Priority Poll</span>
+        <span class="strip-item-badge">Daily</span>
+      </button>
+
+      <button type="button" id="strip-nav-boons" onclick="switchSection('boons')" class="strip-item" title="3. Top 10 Citizen Boons (Kalpavriksha Wishes)">
+        <span class="strip-item-icon">
+          <svg class="gkd-icon" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><circle cx="12" cy="12" r="4"/></svg>
+        </span>
+        <span class="strip-item-label">3. Top 10 Citizen Boons</span>
+        <span class="strip-item-badge">Wishes</span>
+      </button>
+
+      <button type="button" id="strip-nav-elections" onclick="switchSection('elections')" class="strip-item" title="4. Universal Town Stewardship Council">
+        <span class="strip-item-icon">
+          <svg class="gkd-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </span>
+        <span class="strip-item-label">4. Elected Town Council</span>
+        <span class="strip-item-badge">All-Vote</span>
+      </button>
+
+      <button type="button" id="strip-nav-dharma" onclick="switchSection('dharma')" class="strip-item" title="5. Summon Karmic Genie (Perform Dharma)">
+        <span class="strip-item-icon">
+          <svg class="gkd-icon" viewBox="0 0 24 24"><path d="M12 2c-.8 2-1.5 3.5-1.5 5a1.5 1.5 0 0 0 3 0c0-1.5-.7-3-1.5-5z"/><path d="M5 13c0 4 3 6 7 6s7-2 7-6H5z"/><path d="M10 19v2h4v-2"/></svg>
+        </span>
+        <span class="strip-item-label">5. Perform Dharma</span>
+        <span class="strip-item-badge">Mint</span>
+      </button>
+
+      <button type="button" id="strip-nav-necessities" onclick="switchSection('necessities')" class="strip-item" title="6. Fresh Town 8 Basic Necessities">
+        <span class="strip-item-icon">
+          <svg class="gkd-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </span>
+        <span class="strip-item-label">6. 8 Basic Necessities</span>
+        <span class="strip-item-badge">100%</span>
+      </button>
+
+      <button type="button" id="strip-nav-explorer" onclick="switchSection('explorer')" class="strip-item" title="7. Proof-of-Dharma SHA-256 Ledger">
+        <span class="strip-item-icon">
+          <svg class="gkd-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </span>
+        <span class="strip-item-label">7. SHA-256 Block Ledger</span>
+        <span class="strip-item-badge">PoD</span>
+      </button>
+
+      <div class="strip-footer-info mt-auto pt-4 border-t border-teal-500/20 px-3 text-xs text-slate-400 space-y-1.5">
+        <div class="font-bold text-teal-300">Sister Ecosystems:</div>
+        <a href="https://gurukuladesam.com" target="_blank" rel="noopener" class="block hover:text-amber-400 transition">• gurukuladesam.com</a>
+        <a href="https://exams.shishyan.in" target="_blank" rel="noopener" class="block hover:text-amber-400 transition">• exams.shishyan.in</a>
+        <a href="https://games.shishyan.in" target="_blank" rel="noopener" class="block hover:text-amber-400 transition">• games.shishyan.in</a>
       </div>
-      <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3">
-        <div class="text-xs text-slate-400">Total Soulbound Karma Minted</div>
-        <div id="kpi-karma" class="text-base font-bold text-amber-400 mt-0.5">219,892.9 ☸</div>
-        <div class="text-xs text-slate-400 mt-0.5">Non-Transferable Prestige</div>
+    </nav>
+  </aside>
+
+  <!-- ========================================================================
+       TOP CONTEXT HEADER BAR (GURUKULADESAM + SHISHYAN.IN UNIFIED SHELL)
+       ======================================================================== -->
+  <header class="site-header">
+    <div class="header-context-bar">
+      <div class="context-bar-left">
+        <button type="button" class="context-tool-btn" onclick="toggleLeftStrip()" title="Toggle Left Sanctuary Drawer">
+          <svg class="gkd-icon" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <span class="hidden sm:inline">Menu</span>
+        </button>
+
+        <nav class="context-breadcrumbs" aria-label="Breadcrumb">
+          <a href="https://gurukuladesam.com" target="_blank" rel="noopener" class="crumb-domain-pill" title="Guru Kula Desam">
+            <svg class="gkd-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/></svg>
+            <span>genie.shishyan.in</span>
+          </a>
+          <span class="text-slate-500">/</span>
+          <span id="currentSectionCrumb" class="text-teal-300 font-bold text-xs sm:text-sm">1. Dharma Leaderboard &amp; Anti-Hoarding Engine</span>
+        </nav>
       </div>
-      <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3">
-        <div class="text-xs text-slate-400">Town Dharma Commons Pool</div>
-        <div id="kpi-commons" class="text-base font-bold text-emerald-400 mt-0.5">₹38,70,000</div>
-        <div class="text-xs text-slate-400 mt-0.5">100% Given by Citizens & Hoard Decay</div>
-      </div>
-      <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3">
-        <div class="text-xs text-slate-400">Top Honour Holder (Fame #1)</div>
-        <div id="kpi-leader" class="text-base font-bold text-amber-300 mt-0.5 truncate">👑 Vikramaditya Builders</div>
-        <div class="text-xs text-emerald-400 mt-0.5">Gave 64% of Fortune to Town</div>
+
+      <div class="header-right-tools">
+        <!-- Federated Scale Switcher -->
+        <button type="button" id="scale-TOWN" onclick="setScale('TOWN')" class="context-tool-btn active">1. Town</button>
+        <button type="button" id="scale-CITY" onclick="setScale('CITY')" class="context-tool-btn">2. City</button>
+        <button type="button" id="scale-STATE" onclick="setScale('STATE')" class="context-tool-btn">3. State</button>
+        <button type="button" id="scale-COUNTRY" onclick="setScale('COUNTRY')" class="context-tool-btn">4. Country</button>
+
+        <!-- Font Scaler (A- / A+) -->
+        <button type="button" class="context-tool-btn" onclick="adjustFontSize(-0.06)" title="Decrease Font Size">A-</button>
+        <span id="fontScaleIndicator" class="text-xs font-bold text-slate-400">100%</span>
+        <button type="button" class="context-tool-btn" onclick="adjustFontSize(0.06)" title="Increase Font Size">A+</button>
+
+        <!-- Palm-Leaf (Olai Chuvadi) Mode -->
+        <button type="button" class="context-tool-btn" onclick="togglePalmLeafMode()" title="Palm-Leaf (Olai Chuvadi) Manuscript Mode">
+          <svg class="gkd-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </button>
+
+        <!-- 432Hz / 136.1Hz Sacred Om Drone -->
+        <button type="button" id="omDroneBtn" class="context-tool-btn" onclick="toggleOmDrone()" title="Toggle Sacred Om Nada Drone">
+          <svg class="gkd-icon" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        </button>
+
+        <!-- Theme Cycler -->
+        <button type="button" class="context-tool-btn" onclick="cycleTheme()" title="Switch Cosmic / Palm-Leaf / Light Theme">
+          <svg class="gkd-icon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- NAVIGATION TABS -->
-  <nav class="flex flex-wrap gap-2 mb-6">
-    <button onclick="switchTab('leaderboard')" id="tab-btn-leaderboard" class="px-4 py-2.5 rounded-xl text-sm font-semibold border border-slate-700 tab-active transition">
-      👑 1. Dharma Fame Leaderboard & Anti-Hoarding
-    </button>
-    <button onclick="switchTab('genie')" id="tab-btn-genie" class="px-4 py-2.5 rounded-xl text-sm font-semibold border border-slate-700 card-surface text-slate-200 transition">
-      🧞‍♂️ 2. Perform Dharma (Mint Soulbound Fame)
-    </button>
-    <button onclick="switchTab('quests')" id="tab-btn-quests" class="px-4 py-2.5 rounded-xl text-sm font-semibold border border-slate-700 card-surface text-slate-200 transition">
-      🏛️ 3. Sponsor Town Quests (Glass Treasury)
-    </button>
-    <button onclick="switchTab('explorer')" id="tab-btn-explorer" class="px-4 py-2.5 rounded-xl text-sm font-semibold border border-slate-700 card-surface text-slate-200 transition">
-      🔗 4. Proof-of-Dharma SHA-256 Ledger
-    </button>
-  </nav>
+  <!-- ========================================================================
+       MAIN SANCTUARY CONTAINER
+       ======================================================================== -->
+  <main class="main-container">
 
-  <!-- TAB 1: DHARMA LEADERBOARD & ANTI-HOARDING ENGINE -->
-  <section id="tab-leaderboard" class="space-y-6">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <!-- Left 2 Cols: Public Fame & Prestige Leaderboard -->
-      <div class="lg:col-span-2 card-surface rounded-2xl p-5">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-          <div>
-            <h2 class="text-lg font-bold text-white">Public Dharma Honour Board (`Samaj-Gaurav`)</h2>
-            <p class="text-xs text-slate-400">
-              In Karmic Genie, <strong class="text-amber-400">hoarded money gives 0 status</strong>. Citizens and industrialists are ranked strictly by <strong class="text-emerald-400">Soulbound Karma</strong>—how much of their wealth & service they gave away to elevate the community.
-            </p>
+    <!-- FOCUSED HERO BANNER -->
+    <div class="hero-card">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div>
+          <div class="emblem-pill">
+            <svg class="gkd-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/><path d="M3 12h18"/></svg>
+            <span>DHARMA GRAMAM OPERATING SYSTEM • PROOF-OF-DHARMA (PoD)</span>
           </div>
-        </div>
-
-        <div id="leaderboard-list" class="space-y-3">
-          <!-- Populated by JS -->
-        </div>
-      </div>
-
-      <!-- Right Col: The Anti-Hoarding / "Force the Rich to Give" Mechanism -->
-      <div class="space-y-5">
-        <div class="card-surface rounded-2xl p-5 border border-amber-500/30">
-          <div class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-1">The "Golden Potlatch" Engine</div>
-          <h3 class="text-base font-bold text-white mb-2">How Karmic Genie Forces Hoarders to Give</h3>
-          <p class="text-xs text-slate-300 leading-relaxed mb-4">
-            Notice <strong>#4 Dhanapati Hoardings Ltd</strong> at the bottom of the leaderboard: they hold <strong>₹95.5 Lakhs</strong> in idle cash, yet have <strong>0 Karma</strong> and carry the public shame badge <span class="text-red-400 font-semibold">⚠️ Sanchaya-Baddha (Idle Hoarder)</span>.
-          </p>
-
-          <div class="space-y-2.5">
-            <button onclick="triggerHoardingDemurrage()" class="w-full py-2.5 px-4 rounded-xl bg-red-600/90 hover:bg-red-600 text-white font-bold text-xs transition flex items-center justify-between">
-              <span>⏳ Run Anti-Hoarding Demurrage Epoch</span>
-              <span class="font-mono">-5% Idle Hoard → Commons</span>
-            </button>
-
-            <button onclick="awakenHoarderToGive()" class="w-full py-2.5 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs transition flex items-center justify-between">
-              <span>🧞‍♂️ Make Hoarder Give ₹50L for Fame!</span>
-              <span class="font-mono">+Massive Karma Boost</span>
-            </button>
-          </div>
-
-          <div class="mt-4 pt-4 border-t border-slate-800 text-xs text-slate-400 space-y-1.5">
-            <div>• <strong>Choice A (Hoard):</strong> Lose 5% per epoch to automatic Demurrage with <strong>zero credit</strong> and bottom social rank.</div>
-            <div>• <strong>Choice B (Dharma):</strong> Voluntarily fund a town hospital, water plant, or farmer debt relief and become a celebrated <strong>👑 Mahādānī</strong> hero!</div>
-          </div>
-        </div>
-
-        <div class="card-surface rounded-2xl p-5">
-          <h3 class="text-sm font-bold text-white mb-2">Sacrificial Multiplier Math</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Our formula includes a <strong>Sacrificial Multiplier</strong>:
-          </p>
-          <div class="my-2 p-2.5 rounded-lg bg-slate-950 border border-slate-800 text-xs hash-mono text-amber-300">
-            Boost = 1 + 3 × √(Amount_Given / Net_Worth)
-          </div>
-          <p class="text-xs text-slate-400">
-            A teacher giving 33% of her modest savings gets a <strong>2.73× multiplier</strong>, while a billionaire giving 0.01% pocket change gets almost nothing—forcing the wealthy to give away <em>real</em> portions of their fortune to earn top respect!
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            Karmic Genie: A Fresh Town Built on Verified Dharma
+          </h1>
+          <p class="text-sm text-slate-300 mt-1.5 max-w-3xl leading-relaxed">
+            Every day, citizens vote on <strong>what gets implemented first</strong>. Every month, the <strong>Top 10 Citizen Boons (Wishes)</strong> are realized by public poll. Every town position is <strong>voted by all citizens from an open ballot of all citizens</strong>—so only those truly famous for doing good (<strong class="text-amber-400">Dāna &amp; Seva</strong>) rise to lead, and no single person can ever control the outcome.
           </p>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- TAB 2: PERFORM DHARMA (MINT SOULBOUND FAME) -->
-  <section id="tab-genie" class="hidden space-y-6">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div class="card-surface rounded-2xl p-5">
-        <h2 class="text-lg font-bold text-white mb-1">🧞‍♂️ Summon the Karmic Genie: Perform Verified Dharma</h2>
-        <p class="text-xs text-slate-400 mb-4">
-          Select any citizen or enterprise, choose one of the <strong>5 Pillars of Dharma (Pancha-Dāna)</strong>, and see how giving away wealth or Seva hours mints permanent, non-transferable Soulbound Prestige.
-        </p>
-
-        <div class="space-y-3.5 text-xs">
-          <div>
-            <label class="block font-semibold text-slate-300 mb-1">1. Actor (Citizen / Business Performing Dharma)</label>
-            <select id="dharma-actor" onchange="previewKarmaCalculation()" class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white"></select>
-          </div>
-
-          <div>
-            <label class="block font-semibold text-slate-300 mb-1">2. Pillar of Dharma (Pancha-Dāna Category)</label>
-            <select id="dharma-pillar" onchange="previewKarmaCalculation()" class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white">
-              <option value="RUNA_VIMOCHANA">🤝 Runa-Vimochana: Forgive Debt / Back 0% Farmer Credit (1.8x Multiplier)</option>
-              <option value="BHUMI_SEVA">🌱 Bhumi & Prana Seva: Clean Water, Solar, Trees, Roads (1.6x Multiplier)</option>
-              <option value="ANNADANA">🍲 Annadana & Aarogya: Community Kitchens & Free Healthcare (1.5x Multiplier)</option>
-              <option value="VIDYADANA">📚 Vidyadana: Free Gurukula, Schools & Open Knowledge (1.4x Multiplier)</option>
-              <option value="SATYA_NYAYA">⚖️ Satya & Nyaya: Honest Citizen Jury & Public Audit (1.3x Multiplier)</option>
-            </select>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label class="block font-semibold text-slate-300 mb-1">3. Dāna Amount Given Away (₹)</label>
-              <input id="dharma-amount" type="number" value="250000" oninput="previewKarmaCalculation()" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white">
-            </div>
-            <div>
-              <label class="block font-semibold text-slate-300 mb-1">4. Verified Seva Hours (Direct Service)</label>
-              <input id="dharma-seva" type="number" value="20" oninput="previewKarmaCalculation()" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white">
-            </div>
-          </div>
-
-          <div>
-            <label class="block font-semibold text-slate-300 mb-1">5. Public Dedication & Beneficiary Description</label>
-            <input id="dharma-memo" type="text" value="Sponsored 100% Free Village Maternity Clinic & Forgave 15 Artisan Loans" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white">
-          </div>
-
-          <!-- Live Karma Preview Box -->
-          <div class="p-4 rounded-xl bg-slate-950 border border-amber-500/40">
-            <div class="flex items-center justify-between">
-              <span class="text-slate-400">Sacrificial Wealth Ratio:</span>
-              <span id="preview-sacrifice" class="font-bold text-emerald-400">5.0% of Current Wealth (1.67x Boost)</span>
-            </div>
-            <div class="flex items-center justify-between mt-1.5">
-              <span class="text-slate-400">Soulbound Karma to Mint:</span>
-              <span id="preview-karma" class="text-lg font-extrabold text-amber-400">+9,315.0 ☸ Karma</span>
-            </div>
-          </div>
-
-          <button onclick="executeDharmaAct()" class="w-full py-3 px-4 rounded-xl tab-active text-sm hover:opacity-95 transition">
-            ✨ Verify 3-of-3 Proof-of-Dharma & Mint Soulbound Fame
+        <div class="flex flex-wrap gap-2">
+          <button onclick="switchSection('polls')" class="btn-gold">
+            <svg class="gkd-icon" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span>Vote Today's Priority</span>
+          </button>
+          <button onclick="switchSection('boons')" class="btn-teal">
+            <svg class="gkd-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v4"/><path d="M12 18v4"/></svg>
+            <span>Top 10 Citizen Boons</span>
+          </button>
+          <button onclick="switchSection('elections')" class="btn-teal">
+            <svg class="gkd-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span>Elect Town Stewards</span>
           </button>
         </div>
       </div>
 
-      <!-- Right: The 4 Honour Tiers Explained -->
-      <div class="card-surface rounded-2xl p-5 space-y-4">
-        <h2 class="text-lg font-bold text-white">Civic Honour Tiers & Real-World Privileges</h2>
-        <p class="text-xs text-slate-400">
-          Why do even the most ambitious, status-driven people compete to give away their wealth in Karmic Genie? Because every privilege in town is unlocked by your Dharma Tier:
-        </p>
-
-        <div class="space-y-3 text-xs">
-          <div class="p-3.5 rounded-xl bg-slate-900/90 border border-amber-500/40">
-            <div class="font-bold text-amber-400 text-sm">👑 Tier 4: Mahādānī / Rajarshi (50,000+ ☸ Karma)</div>
-            <p class="text-slate-300 mt-1">
-              <strong>Unlocked By:</strong> Giving away a major portion of one's wealth or lifetime service to transform town infrastructure.<br>
-              <strong>Civic Privileges:</strong> Permanent inscription on the Municipal Dharma Pillar, State Guest of Honour status, highest Sabha governance weight, and maximum 0%-interest mutual credit backing for their enterprises.
-            </p>
-          </div>
-
-          <div class="p-3.5 rounded-xl bg-slate-900/90 border border-emerald-500/30">
-            <div class="font-bold text-emerald-400 text-sm">🏛️ Tier 3: Lok-Stambha — Pillar of the Town (15,000+ ☸ Karma)</div>
-            <p class="text-slate-300 mt-1">
-              <strong>Unlocked By:</strong> Sponsoring public schools, water plants, or community kitchens.<br>
-              <strong>Civic Privileges:</strong> Fast-track green-channel municipal permits, zero-collateral 0% mutual credit lines, and Town Council advisory seat.
-            </p>
-          </div>
-
-          <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-700">
-            <div class="font-bold text-sky-400 text-sm">🔥 Tier 2: Dharma-Rakshak — Community Guardian (3,000+ ☸ Karma)</div>
-            <p class="text-slate-300 mt-1">
-              <strong>Unlocked By:</strong> Consistent monthly Dāna (>10% surplus) or active Seva hours (teaching, healthcare, auditing).<br>
-              <strong>Civic Privileges:</strong> Eligible to serve on paid Citizen Juries, priority public utility rebates, and community credit co-signing.
-            </p>
-          </div>
-
-          <div class="p-3.5 rounded-xl bg-red-950/30 border border-red-500/30">
-            <div class="font-bold text-red-400 text-sm">⚠️ Tier 0: Sanchaya-Baddha — Idle Hoarder (&lt;500 ☸ Karma with High Hoard)</div>
-            <p class="text-slate-300 mt-1">
-              <strong>Triggered By:</strong> Sitting on >₹10 Lakh idle surplus while giving &lt;5% to the community.<br>
-              <strong>Consequence:</strong> Zero civic honours, ineligible for public contracts, and subject to automatic <strong>Hoarding Demurrage</strong> that recycles idle funds into the Town Commons Pool.
-            </p>
-          </div>
+      <!-- 4 Live KPI Cards -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5 pt-4 border-t border-slate-700/60">
+        <div class="p-3 rounded-xl bg-slate-900/75 border border-slate-700/60">
+          <div class="text-xs text-slate-400">Active Jurisdiction</div>
+          <div id="kpi-scale" class="text-base font-bold text-white mt-0.5">Model Dharma Gramam #01</div>
+          <div id="kpi-pop" class="text-xs text-teal-300 mt-0.5">25,000 Citizens On-Chain</div>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-900/75 border border-slate-700/60">
+          <div class="text-xs text-slate-400">Total Soulbound Karma</div>
+          <div id="kpi-karma" class="text-base font-bold text-amber-400 mt-0.5">578,830</div>
+          <div class="text-xs text-slate-400 mt-0.5">100% Earned via Dāna &amp; Seva</div>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-900/75 border border-slate-700/60">
+          <div class="text-xs text-slate-400">Town Dharma Commons Pool</div>
+          <div id="kpi-commons" class="text-base font-bold text-emerald-400 mt-0.5">₹46,50,000</div>
+          <div class="text-xs text-slate-400 mt-0.5">Funds Daily Polls &amp; Top 10 Boons</div>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-900/75 border border-slate-700/60">
+          <div class="text-xs text-slate-400">Most Respected Citizen (#1)</div>
+          <div id="kpi-leader" class="text-base font-bold text-amber-300 mt-0.5 truncate">Vikramaditya Builders</div>
+          <div class="text-xs text-teal-300 mt-0.5">Gave 64% of Fortune to Town</div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- TAB 3: SPONSOR TOWN QUESTS (GLASS TREASURY) -->
-  <section id="tab-quests" class="hidden space-y-6">
-    <div class="card-surface rounded-2xl p-5">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4">
-        <div>
-          <h2 class="text-lg font-bold text-white">Public Dharma Quests (Competitive Generosity for Town Needs)</h2>
-          <p class="text-xs text-slate-400">
-            Instead of begging reluctant taxpayers or borrowing from commercial banks at 12% interest, the Town posts verified civic needs as <strong>High-Prestige Dharma Quests</strong>. Wealthy citizens compete to sponsor them first to claim the Soulbound Karma & permanent naming honour!
-          </p>
-        </div>
-      </div>
-
-      <div id="quests-container" class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-        <!-- Populated by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- TAB 4: SHA-256 BLOCK EXPLORER -->
-  <section id="tab-explorer" class="hidden space-y-6">
-    <div class="card-surface rounded-2xl p-5">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-        <div>
-          <h2 class="text-lg font-bold text-white">Immutable Proof-of-Dharma (`PoD`) SHA-256 Blockchain</h2>
-          <p class="text-xs text-slate-400">
-            Every act of Dāna, Seva, and Anti-Hoarding Demurrage is permanently sealed with 3-of-3 signatures (Beneficiary + Citizen Jury + Geo-Audit).
-          </p>
-        </div>
-      </div>
-
-      <div id="chain-container" class="space-y-3">
-        <!-- Populated by JS -->
-      </div>
-    </div>
-  </section>
-
-  <script>
-    // =========================================================================
-    // KARMIC GENIE CORE ENGINE (BROWSER EDITION)
-    // =========================================================================
-    let SCALE = 'TOWN';
-    const SCALE_META = {
-      TOWN:    { name: 'Model Dharma Town #01', pop: '25,000 Citizens On-Chain', mult: 1 },
-      CITY:    { name: 'Metropolitan Dharma Hub (18 Towns)', pop: '6,50,000 Citizens On-Chain', mult: 15 },
-      STATE:   { name: 'State Dharma Federation (420 Towns)', pop: '4.2 Crore Citizens On-Chain', mult: 200 },
-      COUNTRY: { name: 'National Karmic Grid (8,500+ Nodes)', pop: '1.4 Billion Citizens On-Chain', mult: 1500 }
-    };
-
-    const PILLARS = {
-      RUNA_VIMOCHANA: { name: 'Runa-Vimochana (Debt Relief & 0% Credit)', mult: 1.8 },
-      BHUMI_SEVA:     { name: 'Bhumi & Civic Infrastructure', mult: 1.6 },
-      ANNADANA:       { name: 'Annadana & Free Healthcare', mult: 1.5 },
-      VIDYADANA:      { name: 'Vidyadana (Open Education)', mult: 1.4 },
-      SATYA_NYAYA:    { name: 'Satya & Nyaya (Citizen Audit)', mult: 1.3 }
-    };
-
-    let state = {
-      commonsPool: 3870000,
-      accounts: [
-        {
-          id: 'CIT-03',
-          name: 'Vikramaditya Builders',
-          role: 'Reformed Industrialist',
-          cash: 1800000,
-          given: 3200000,
-          sevaHours: 20,
-          karma: 197640.0,
-          lastDeed: 'Built Town Clean Water Plant & Forgave ₹20L Farmer Loans'
-        },
-        {
-          id: 'CIT-02',
-          name: 'Kisan & Artisan Cooperative',
-          role: 'Local Producer Guild',
-          cash: 270000,
-          given: 180000,
-          sevaHours: 60,
-          karma: 12322.9,
-          lastDeed: 'Community Kitchen (Annadana) + Free Seed Bank for Small Farmers'
-        },
-        {
-          id: 'CIT-01',
-          name: 'Meera Devi (Village Teacher)',
-          role: 'Educator & Gurukula Mentor',
-          cash: 80000,
-          given: 40000,
-          sevaHours: 120,
-          karma: 9930.0,
-          lastDeed: 'Free Evening Math & Coding Gurukula for 80 Children'
-        },
-        {
-          id: 'CIT-04',
-          name: 'Dhanapati Hoardings Ltd',
-          role: 'Luxury Financier',
-          cash: 9550000,
-          given: 0,
-          sevaHours: 0,
-          karma: 0.0,
-          lastDeed: 'Refused to contribute — penalised by Hoarding Demurrage'
-        }
-      ],
-      quests: [
-        {
-          id: 'QUEST-01',
-          title: '🍲 Town Annadana Community Kitchen (365 Days Free Meals)',
-          pillar: 'ANNADANA',
-          cost: 1200000,
-          bonusKarma: 45000,
-          sponsoredBy: null
-        },
-        {
-          id: 'QUEST-02',
-          title: '🤝 Farmer Debt Jubilee (Clear 45 Distressed Crop Loans)',
-          pillar: 'RUNA_VIMOCHANA',
-          cost: 2000000,
-          bonusKarma: 82000,
-          sponsoredBy: null
-        },
-        {
-          id: 'QUEST-03',
-          title: '🌱 100kW Solar Microgrid & Digital Library for Ward 4 School',
-          pillar: 'BHUMI_SEVA',
-          cost: 1500000,
-          bonusKarma: 58000,
-          sponsoredBy: null
-        }
-      ],
-      chain: []
-    };
-
-    function fmtINR(val) {
-      const scaled = val * SCALE_META[SCALE].mult;
-      return '₹' + Math.round(scaled).toLocaleString('en-IN');
-    }
-
-    function getTierBadge(acc) {
-      if (acc.karma >= 50000) return { label: '👑 Mahādānī / Rajarshi (Supreme Benefactor)', color: 'text-amber-400 bg-amber-500/15 border-amber-500/40' };
-      if (acc.karma >= 15000) return { label: '🏛️ Lok-Stambha (Pillar of the Town)', color: 'text-emerald-400 bg-emerald-500/15 border-emerald-500/40' };
-      if (acc.karma >= 3000)  return { label: '🔥 Dharma-Rakshak (Community Guardian)', color: 'text-sky-400 bg-sky-500/15 border-sky-500/40' };
-      if (acc.karma >= 500)   return { label: '🌱 Sevak (Active Contributor)', color: 'text-slate-300 bg-slate-800 border-slate-700' };
-      return { label: '⚠️ Sanchaya-Baddha (Idle Hoarder — 0 Prestige)', color: 'text-red-400 bg-red-500/15 border-red-500/40' };
-    }
-
-    async function sha256(message) {
-      if (window.crypto && window.crypto.subtle) {
-        const msgBuffer = new TextEncoder().encode(message);
-        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-        return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
-      }
-      return '8f4e2b90c1d7a6539012837465a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2a1';
-    }
-
-    async function recordDharmaBlock(txType, actorName, beneficiary, pillar, amount, karmaMinted) {
-      const index = state.chain.length;
-      const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
-      const prevHash = index === 0 ? '0'.repeat(64) : state.chain[0].hash;
-      const payload = `${index}|${timestamp}|${txType}|${actorName}|${beneficiary}|${pillar}|${amount}|${karmaMinted}|${prevHash}`;
-      const hash = await sha256(payload);
-
-      state.chain.unshift({
-        index,
-        timestamp,
-        txType,
-        actorName,
-        beneficiary,
-        pillar,
-        amount,
-        karmaMinted,
-        prevHash,
-        hash
-      });
-      renderAll();
-    }
-
-    function calculateSacrificialKarma(actor, amountGiven, pillarKey, sevaHours) {
-      const pMult = PILLARS[pillarKey] ? PILLARS[pillarKey].mult : 1.5;
-      const preWealth = Math.max(actor.cash, 1);
-      const frac = Math.min(amountGiven / preWealth, 1.0);
-      const boost = 1.0 + (3.0 * Math.sqrt(frac));
-      const danaKarma = (amountGiven / 100.0) * pMult * boost;
-      const sevaKarma = (sevaHours * 50.0) * pMult;
-      return {
-        karma: Math.round((danaKarma + sevaKarma) * 10) / 10,
-        pct: Math.round(frac * 1000) / 10,
-        boost: Math.round(boost * 100) / 100
-      };
-    }
-
-    function switchTab(tab) {
-      ['leaderboard', 'genie', 'quests', 'explorer'].forEach(t => {
-        document.getElementById('tab-' + t).classList.toggle('hidden', t !== tab);
-        const btn = document.getElementById('tab-btn-' + t);
-        if (t === tab) {
-          btn.className = 'px-4 py-2.5 rounded-xl text-sm font-semibold border border-slate-700 tab-active transition';
-        } else {
-          btn.className = 'px-4 py-2.5 rounded-xl text-sm font-semibold border border-slate-700 card-surface text-slate-200 transition';
-        }
-      });
-    }
-
-    function setScale(s) {
-      SCALE = s;
-      ['TOWN', 'CITY', 'STATE', 'COUNTRY'].forEach(k => {
-        const btn = document.getElementById('scale-' + k);
-        btn.className = k === s ? 'px-3 py-1.5 rounded-md tab-active transition' : 'px-3 py-1.5 rounded-md text-slate-400 transition';
-      });
-      renderAll();
-    }
-
-    function previewKarmaCalculation() {
-      const actorId = document.getElementById('dharma-actor').value;
-      const pillar = document.getElementById('dharma-pillar').value;
-      const amount = parseFloat(document.getElementById('dharma-amount').value) || 0;
-      const seva = parseFloat(document.getElementById('dharma-seva').value) || 0;
-      const actor = state.accounts.find(a => a.id === actorId) || state.accounts[0];
-
-      const res = calculateSacrificialKarma(actor, amount, pillar, seva);
-      document.getElementById('preview-sacrifice').textContent = `${res.pct}% of Current Hoard (${res.boost}x Sacrificial Boost)`;
-      document.getElementById('preview-karma').textContent = `+${res.karma.toLocaleString()} ☸ Soulbound Karma`;
-    }
-
-    async function executeDharmaAct() {
-      const actorId = document.getElementById('dharma-actor').value;
-      const pillar = document.getElementById('dharma-pillar').value;
-      const amount = parseFloat(document.getElementById('dharma-amount').value) || 0;
-      const seva = parseFloat(document.getElementById('dharma-seva').value) || 0;
-      const memo = document.getElementById('dharma-memo').value.trim() || 'Verified Community Dharma';
-
-      const actor = state.accounts.find(a => a.id === actorId);
-      if (!actor) return;
-      if (amount > actor.cash) {
-        alert(`${actor.name} only has ₹${actor.cash.toLocaleString('en-IN')} available!`);
-        return;
-      }
-
-      const res = calculateSacrificialKarma(actor, amount, pillar, seva);
-      actor.cash -= amount;
-      actor.given += amount;
-      actor.sevaHours += seva;
-      actor.karma = Math.round((actor.karma + res.karma) * 10) / 10;
-      actor.lastDeed = memo;
-      state.commonsPool += amount;
-
-      await recordDharmaBlock('PROOF_OF_DHARMA', actor.name, memo, pillar, amount, res.karma);
-      switchTab('leaderboard');
-    }
-
-    async function triggerHoardingDemurrage() {
-      const hoarder = state.accounts.find(a => a.id === 'CIT-04');
-      if (!hoarder || hoarder.cash <= 1000000) return;
-      const excess = hoarder.cash - 1000000;
-      const demurrage = Math.round(excess * 0.05);
-      hoarder.cash -= demurrage;
-      state.commonsPool += demurrage;
-      hoarder.lastDeed = `Idle Hoard Demurrage: ₹${demurrage.toLocaleString('en-IN')} auto-recycled to Town Commons (0 Karma earned)`;
-
-      await recordDharmaBlock(
-        'HOARDING_DEMURRAGE_DECAY',
-        hoarder.name,
-        'Town Dharma Commons Pool (Auto-Sweep of Idle Hoard)',
-        'RUNA_VIMOCHANA',
-        demurrage,
-        0
-      );
-    }
-
-    async function awakenHoarderToGive() {
-      const hoarder = state.accounts.find(a => a.id === 'CIT-04');
-      if (!hoarder) return;
-      const giveAmt = Math.min(5000000, Math.round(hoarder.cash * 0.6));
-      if (giveAmt <= 0) return;
-
-      const res = calculateSacrificialKarma(hoarder, giveAmt, 'RUNA_VIMOCHANA', 40);
-      hoarder.cash -= giveAmt;
-      hoarder.given += giveAmt;
-      hoarder.sevaHours += 40;
-      hoarder.karma = Math.round((hoarder.karma + res.karma) * 10) / 10;
-      hoarder.lastDeed = 'Awakened from hoarding! Funded Town Hospital & Cleared ₹50L Farmer Debt for Mahādānī Fame';
-      state.commonsPool += giveAmt;
-
-      await recordDharmaBlock(
-        'MAHADANA_AWAKENING',
-        hoarder.name,
-        'Town Free Hospital & Farmer Debt Jubilee',
-        'RUNA_VIMOCHANA',
-        giveAmt,
-        res.karma
-      );
-    }
-
-    async function sponsorQuest(questId, actorId) {
-      const quest = state.quests.find(q => q.id === questId);
-      const actor = state.accounts.find(a => a.id === actorId);
-      if (!quest || !actor || quest.sponsoredBy) return;
-
-      if (actor.cash < quest.cost) {
-        alert(`${actor.name} needs more liquid balance to sponsor this quest solo!`);
-        return;
-      }
-
-      actor.cash -= quest.cost;
-      actor.given += quest.cost;
-      actor.karma += quest.bonusKarma;
-      actor.lastDeed = `Sponsored Civic Quest: ${quest.title}`;
-      quest.sponsoredBy = actor.name;
-      state.commonsPool += quest.cost;
-
-      await recordDharmaBlock('QUEST_SPONSORED', actor.name, quest.title, quest.pillar, quest.cost, quest.bonusKarma);
-    }
-
-    function renderAll() {
-      // Sort accounts strictly by Soulbound Karma (Fame Rank)
-      const ranked = [...state.accounts].sort((a, b) => b.karma - a.karma);
-      const totalKarma = ranked.reduce((s, a) => s + a.karma, 0);
-
-      document.getElementById('kpi-scale').textContent = SCALE_META[SCALE].name;
-      document.getElementById('kpi-pop').textContent = SCALE_META[SCALE].pop;
-      document.getElementById('kpi-karma').textContent = (totalKarma * SCALE_META[SCALE].mult).toLocaleString('en-IN') + ' ☸';
-      document.getElementById('kpi-commons').textContent = fmtINR(state.commonsPool);
-      document.getElementById('kpi-leader').textContent = '👑 ' + ranked[0].name;
-
-      // Render Leaderboard
-      const lbEl = document.getElementById('leaderboard-list');
-      lbEl.innerHTML = ranked.map((a, idx) => {
-        const badge = getTierBadge(a);
-        const totalHandled = a.cash + a.given;
-        const pctGiven = totalHandled > 0 ? Math.round((a.given / totalHandled) * 1000) / 10 : 0;
-
-        return `
-          <div class="p-4 rounded-xl bg-slate-900/90 border ${idx === 0 ? 'border-amber-500/60 gold-glow' : 'border-slate-800'}">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div class="flex items-start gap-3">
-                <div class="w-9 h-9 rounded-xl flex items-center justify-center font-extrabold text-sm ${idx === 0 ? 'bg-amber-500 text-black' : 'bg-slate-800 text-slate-300'}">
-                  #${idx + 1}
-                </div>
-                <div>
-                  <div class="flex flex-wrap items-center gap-2">
-                    <span class="font-bold text-base text-white">${a.name}</span>
-                    <span class="text-xs px-2.5 py-0.5 rounded-full border font-semibold ${badge.color}">${badge.label}</span>
-                  </div>
-                  <div class="text-xs text-slate-400 mt-1">Latest Deed: <span class="text-slate-200">${a.lastDeed}</span></div>
-                </div>
-              </div>
-
-              <div class="text-right">
-                <div class="text-xs text-slate-400">Soulbound Karma (Fame)</div>
-                <div class="text-lg font-extrabold text-amber-400">${(a.karma * SCALE_META[SCALE].mult).toLocaleString('en-IN')} ☸</div>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-3 gap-2 mt-3 pt-3 border-t border-slate-800/80 text-xs">
-              <div>
-                <span class="text-slate-400">Total Given Away (Dāna):</span>
-                <div class="font-bold text-emerald-400">${fmtINR(a.given)} (${pctGiven}% of Wealth)</div>
-              </div>
-              <div>
-                <span class="text-slate-400">Verified Seva Service:</span>
-                <div class="font-bold text-sky-400">${a.sevaHours} Hours Verified</div>
-              </div>
-              <div>
-                <span class="text-slate-400">Remaining Personal Cash:</span>
-                <div class="font-mono text-slate-300">${fmtINR(a.cash)}</div>
-              </div>
+    <!-- ======================================================================
+         SECTION 1: DHARMA FAME LEADERBOARD & ANTI-HOARDING ENGINE
+         ====================================================================== -->
+    <section id="sec-overview" class="space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <h2 class="text-xl font-bold text-white">Public Dharma Honour Board (All Citizens Ranked by Good Done)</h2>
+              <p class="text-xs text-slate-400">
+                In a Karmic Genie town, hoarding wealth gives <strong>0 respect and 0 eligibility for public office</strong>. Only verified giving (Dāna) and community service (Seva) earn Soulbound Karma.
+              </p>
             </div>
           </div>
-        `;
-      }).join('');
+          <div id="leaderboard-list" class="space-y-3"></div>
+        </div>
 
-      // Populate Actor Select if empty
-      const actorSel = document.getElementById('dharma-actor');
-      if (actorSel.options.length === 0) {
-        state.accounts.forEach(a => {
-          actorSel.add(new Option(`${a.name} (Cash: ₹${a.cash.toLocaleString('en-IN')})`, a.id));
-        });
-      } else {
-        Array.from(actorSel.options).forEach(opt => {
-          const acc = state.accounts.find(a => a.id === opt.value);
-          if (acc) opt.text = `${acc.name} (Available: ${fmtINR(acc.cash)})`;
-        });
-      }
-      previewKarmaCalculation();
+        <div class="space-y-5">
+          <div class="gkd-card gold-border">
+            <div class="text-xs font-bold uppercase text-amber-400 mb-1">The "Golden Potlatch" Engine</div>
+            <h3 class="text-base font-bold text-white mb-2">How Hoarders Are Forced to Give Away to Earn Respect</h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+              Look at <strong>#11 Dhanapati Hoardings Pvt Ltd</strong> at the bottom of the town roster: they sit on <strong>₹95.5 Lakhs</strong> in idle cash, yet have <strong>0 Karma</strong>, cannot be elected to any town post, and lose 5% per epoch to automatic <strong>Hoarding Demurrage</strong>.
+            </p>
+            <div class="space-y-2.5">
+              <button onclick="triggerHoardingDemurrage()" class="w-full py-2.5 px-4 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs transition flex items-center justify-between">
+                <span>Run Anti-Hoarding Demurrage</span>
+                <span class="hash-mono">-5% Hoard → Commons</span>
+              </button>
+              <button onclick="awakenHoarderToGive()" class="w-full btn-gold py-2.5 px-4 justify-between">
+                <span>Make Hoarder Give ₹55L for Fame!</span>
+                <span class="hash-mono">+Mahadani Rank</span>
+              </button>
+            </div>
+          </div>
 
-      // Render Quests
-      const qEl = document.getElementById('quests-container');
-      qEl.innerHTML = state.quests.map(q => `
-        <div class="p-4 rounded-xl bg-slate-900 border ${q.sponsoredBy ? 'border-emerald-500/50' : 'border-slate-800'} flex flex-col justify-between">
+          <div class="gkd-card">
+            <h3 class="text-sm font-bold text-teal-300 mb-2">Why No Single Person Can Control the Town</h3>
+            <ul class="text-xs text-slate-300 space-y-2 leading-relaxed">
+              <li>• <strong>Sacrificial Math:</strong> Giving 35% of modest savings earns a higher multiplier than a billionaire giving pocket change.</li>
+              <li>• <strong>Quadratic Citizen Consensus:</strong> Daily priorities and Top 10 Boons require broad citizen votes—one rich person cannot outvote the village.</li>
+              <li>• <strong>Instant Recall:</strong> Any elected steward can be replaced at any moment by universal town vote.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 2: DAILY PUBLIC PRIORITY POLLING (VOTED BY THE PEOPLE EVERY DAY)
+         ====================================================================== -->
+    <section id="sec-polls" class="hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <h2 class="text-xl font-bold text-white">Daily Public Priority Poll ("What Gets Implemented First Today?")</h2>
+              <p class="text-xs text-slate-400">
+                Every day, the people propose and vote on what the town needs most. The #1 voted item automatically unlocks funding from the Town Commons Pool first—zero politicians or bureaucrats deciding behind closed doors.
+              </p>
+            </div>
+            <button onclick="executeTopDailyPriority()" class="btn-gold">
+              Auto-Execute #1 Voted Priority Now
+            </button>
+          </div>
+
+          <div id="daily-polls-list" class="space-y-3"></div>
+        </div>
+
+        <div class="gkd-card space-y-3 h-fit">
+          <h3 class="text-base font-bold text-white">Submit a Proposal for Today's Town Poll</h3>
+          <p class="text-xs text-slate-400">
+            Any citizen can place a town need on the daily ballot. If the people vote it to #1, the smart treasury funds it immediately.
+          </p>
+          <div class="space-y-2.5 text-xs">
+            <div>
+              <label class="block font-semibold text-slate-300 mb-1">Proposal Title</label>
+              <input id="new-poll-title" type="text" placeholder="e.g. Shaded Banyan Walking Path & Solar Lamps" class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white">
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-300 mb-1">Civic Domain</label>
+              <select id="new-poll-cat" class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white">
+                <option value="Water & Sanitation (Prana)">Water &amp; Sanitation (Prana)</option>
+                <option value="Vidyadana (Education)">Vidyadana (Education &amp; Gurukula)</option>
+                <option value="Aarogya (Healthcare)">Aarogya (Free Healthcare)</option>
+                <option value="Annam (Food & Organic Farming)">Annam (Food &amp; Organic Farming)</option>
+                <option value="Urja (Clean Solar & Infra)">Urja (Clean Solar &amp; Infra)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-300 mb-1">Estimated Commons Budget (₹)</label>
+              <input id="new-poll-cost" type="number" value="450000" class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white">
+            </div>
+            <button onclick="proposeDailyPriority()" class="w-full btn-teal py-2.5">
+              + Place on Today's Public Ballot
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 3: TOP 10 CITIZEN BOONS (KALPAVRIKSHA — WISHES REALIZED BY ALL)
+         ====================================================================== -->
+    <section id="sec-boons" class="hidden space-y-6">
+      <div class="gkd-card gold-border">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <div class="text-xs font-bold uppercase text-amber-400 mb-1">${PILLARS[q.pillar].name}</div>
-            <div class="text-sm font-bold text-white mb-2">${q.title}</div>
-            <div class="text-xs text-slate-400 mb-3">
-              Sponsor Cost: <strong class="text-white">${fmtINR(q.cost)}</strong><br>
-              Fame Reward: <strong class="text-amber-400">+${q.bonusKarma.toLocaleString()} ☸ Soulbound Karma</strong>
+            <div class="text-xs font-bold uppercase text-amber-400">Kalpavriksha — The Wish-Fulfilling Civic Tree</div>
+            <h2 class="text-xl font-bold text-white mt-0.5">Top 10 Citizen Boons of the Town (Voted by All People)</h2>
+            <p class="text-xs text-slate-300 mt-1 max-w-3xl">
+              Just as the Karmic Genie rewards Dharma, the town maintains a live <strong>Top 10 Boons Poll</strong> where citizens nominate and vote on the most inspiring personal or community wishes of high-Dharma contributors. The Top 10 voted citizens get their wishes realized directly from the Commons Pool!
+            </p>
+          </div>
+          <button onclick="grantNextTopBoon()" class="btn-gold">
+            Realize Next Top-Voted Boon Now
+          </button>
+        </div>
+      </div>
+
+      <div id="boons-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 4: UNIVERSAL TOWN STEWARDSHIP COUNCIL (ALL CITIZENS ON BALLOT)
+         ====================================================================== -->
+    <section id="sec-elections" class="hidden space-y-6">
+      <div class="gkd-card">
+        <h2 class="text-xl font-bold text-white">Universal Dharma Stewardship Council (100% Open Citizen Ballot)</h2>
+        <p class="text-xs text-slate-300 mt-1">
+          In this town, there are <strong>no career politicians and no party tickets</strong>. Every single citizen is automatically part of the candidate list for every stewardship position, sorted transparently by their verified <strong>Soulbound Karma</strong>. Only those truly famous for doing good get voted into stewardship—and idle hoarders (`0 Karma`) are constitutionally locked out until they serve the community.
+        </p>
+      </div>
+
+      <div id="elections-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 5: SUMMON KARMIC GENIE (PERFORM DHARMA & MINT FAME)
+         ====================================================================== -->
+    <section id="sec-dharma" class="hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="gkd-card gold-border space-y-4">
+          <h2 class="text-xl font-bold text-white">Summon the Karmic Genie: Perform Verified Dharma</h2>
+          <p class="text-xs text-slate-300">
+            Give away surplus wealth (*Dāna*) or contribute verified service hours (*Seva*) across the 5 Pillars of Dharma to mint permanent, non-transferable Soulbound Karma and climb the town ballot.
+          </p>
+
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="block font-semibold text-slate-300 mb-1">1. Citizen / Enterprise Performing Dharma</label>
+              <select id="dharma-actor" onchange="previewKarmaCalculation()" class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white"></select>
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-300 mb-1">2. Pillar of Dharma (Pancha-Dāna)</label>
+              <select id="dharma-pillar" onchange="previewKarmaCalculation()" class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white">
+                <option value="RUNA_VIMOCHANA">Runa-Vimochana: Debt Relief &amp; 0% Credit Backing (1.8x Multiplier)</option>
+                <option value="BHUMI_SEVA">Bhumi &amp; Prana Seva: Water, Solar, Trees, Roads (1.6x Multiplier)</option>
+                <option value="ANNADANA">Annadana &amp; Aarogya: Community Kitchens &amp; Free Healthcare (1.5x Multiplier)</option>
+                <option value="VIDYADANA">Vidyadana: Free Gurukula &amp; Open Knowledge (1.4x Multiplier)</option>
+                <option value="SATYA_NYAYA">Satya &amp; Nyaya: Honest Citizen Jury &amp; Audit (1.3x Multiplier)</option>
+              </select>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block font-semibold text-slate-300 mb-1">3. Dāna Amount Given Away (₹)</label>
+                <input id="dharma-amount" type="number" value="250000" oninput="previewKarmaCalculation()" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white">
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-300 mb-1">4. Verified Seva Hours</label>
+                <input id="dharma-seva" type="number" value="25" oninput="previewKarmaCalculation()" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white">
+              </div>
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-300 mb-1">5. Beneficiary &amp; Public Dedication</label>
+              <input id="dharma-memo" type="text" value="Funded Free Town Maternity Clinic & Forgave 20 Artisan Loans" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white">
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950 border border-amber-500/40">
+              <div class="flex justify-between">
+                <span class="text-slate-400">Sacrificial Wealth Ratio:</span>
+                <span id="preview-sacrifice" class="font-bold text-teal-300">13.9% of Hoard</span>
+              </div>
+              <div class="flex justify-between mt-1.5">
+                <span class="text-slate-400">Soulbound Karma to Mint:</span>
+                <span id="preview-karma" class="text-base font-extrabold text-amber-400">+11,775 Soulbound Karma</span>
+              </div>
+            </div>
+
+            <button onclick="executeDharmaAct()" class="w-full btn-gold py-3 text-sm">
+              Verify 3-of-3 Proof-of-Dharma &amp; Mint Soulbound Fame
+            </button>
+          </div>
+        </div>
+
+        <div class="gkd-card space-y-4">
+          <h3 class="text-lg font-bold text-white">End-to-End Town Incentive Loop</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            See how all 6 modules lock together into a self-sustaining civilization where greed is transmuted into generosity:
+          </p>
+          <div class="space-y-3 text-xs text-slate-300">
+            <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+              <strong class="text-amber-400">1. Give to Rise (`Dāna & Seva`):</strong> Wealthy citizens and skilled workers give to the Town Commons Pool and perform Seva to earn Soulbound Karma.
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+              <strong class="text-teal-300">2. Daily Public Polling:</strong> The Commons Pool funds the #1 priority voted by all citizens every single day.
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+              <strong class="text-emerald-400">3. Top 10 Boons (`Kalpavriksha`):</strong> Citizens who serve the town have their highest aspirations and community wishes voted into the Top 10 Boons and realized by all.
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+              <strong class="text-sky-400">4. Universal Dharma Elections:</strong> Only those with proven Dharma are elected by the people to steward the 8 Basic Necessities of the town.
             </div>
           </div>
-          ${
-            q.sponsoredBy
-              ? `<div class="py-2 px-3 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold text-center">
-                   ✓ Sponsored by ${q.sponsoredBy}
-                 </div>`
-              : `<div class="space-y-1.5">
-                   <button onclick="sponsorQuest('${q.id}', 'CIT-04')" class="w-full py-2 px-3 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs transition">
-                     Sponsor as Dhanapati Hoardings
-                   </button>
-                   <button onclick="sponsorQuest('${q.id}', 'CIT-03')" class="w-full py-1.5 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs transition">
-                     Sponsor as Vikramaditya Builders
-                   </button>
-                 </div>`
-          }
         </div>
-      `).join('');
+      </div>
+    </section>
 
-      // Render Block Explorer
-      const chainEl = document.getElementById('chain-container');
-      chainEl.innerHTML = state.chain.map(b => `
-        <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-xs">
-          <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
-            <div class="flex items-center gap-2">
-              <span class="px-2 py-0.5 rounded bg-amber-500 text-black font-bold">Block #${b.index}</span>
-              <span class="font-mono px-2 py-0.5 rounded bg-slate-800 text-amber-300">${b.txType}</span>
-              <span class="text-slate-400">${b.timestamp}</span>
-            </div>
-            <div class="font-bold text-amber-400">+${b.karmaMinted.toLocaleString()} ☸ Karma Minted</div>
-          </div>
-          <div class="text-slate-200 font-semibold mt-1">
-            ${b.actorName} → ${b.beneficiary} (${fmtINR(b.amount)})
-          </div>
-          <div class="mt-2 pt-2 border-t border-slate-800/80 flex flex-col sm:flex-row sm:justify-between gap-1 hash-mono text-slate-500">
-            <span class="truncate">Prev: ${b.prevHash}</span>
-            <span class="truncate text-emerald-400">SHA-256: ${b.hash}</span>
-          </div>
-        </div>
-      `).join('');
-    }
+    <!-- ======================================================================
+         SECTION 6: FRESH TOWN 8 BASIC NECESSITIES (ASHTA-ADHARA)
+         ====================================================================== -->
+    <section id="sec-necessities" class="hidden space-y-6">
+      <div class="gkd-card">
+        <h2 class="text-xl font-bold text-white">Starting Over: The 8 Guaranteed Basic Necessities (`Ashta-Adhara`)</h2>
+        <p class="text-xs text-slate-300 mt-1">
+          When starting a fresh town from the ground up on the Karmic Genie ledger, all 8 foundational necessities of human thriving—Food, Pure Water, Eco-Housing, Gurukula Education, Holistic Healthcare, Clean Energy/Internet, 0% Mutual Credit, and Peaceful Justice—are guaranteed by the Commons and stewarded by the highest-Dharma citizens elected by all.
+        </p>
+      </div>
 
-    async function boot() {
-      await recordDharmaBlock('GENESIS_CHARTER', 'Karmic Genie Protocol', 'Constitutional Dharma Ledger Initialized', 'SATYA_NYAYA', 0, 0);
-      await recordDharmaBlock('PROOF_OF_DHARMA', 'Meera Devi (Village Teacher)', 'Free Evening Math & Coding Gurukula for 80 Children', 'VIDYADANA', 40000, 9930);
-      await recordDharmaBlock('PROOF_OF_DHARMA', 'Kisan & Artisan Cooperative', 'Community Kitchen (Annadana) + Seed Bank', 'ANNADANA', 180000, 12322.9);
-      await recordDharmaBlock('PROOF_OF_DHARMA', 'Vikramaditya Builders', 'Built Town Clean Water Plant & Forgave ₹20L Farmer Loans', 'RUNA_VIMOCHANA', 3200000, 197640);
-      await recordDharmaBlock('HOARDING_DEMURRAGE_DECAY', 'Dhanapati Hoardings Ltd', '5% Idle Hoard Auto-Swept to Town Commons Pool', 'RUNA_VIMOCHANA', 450000, 0);
-    }
+      <div id="necessities-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+    </section>
 
-    boot();
-  </script>
+    <!-- ======================================================================
+         SECTION 7: PROOF-OF-DHARMA SHA-256 BLOCK EXPLORER
+         ====================================================================== -->
+    <section id="sec-explorer" class="hidden space-y-6">
+      <div class="gkd-card">
+        <h2 class="text-xl font-bold text-white">Immutable Proof-of-Dharma (`PoD`) SHA-256 Blockchain</h2>
+        <p class="text-xs text-slate-400 mt-1">
+          Every daily poll vote, realized citizen boon, stewardship election, Dāna gift, and anti-hoarding demurrage sweep is cryptographically chained and verifiable by every citizen.
+        </p>
+      </div>
+      <div id="chain-container" class="space-y-3"></div>
+    </section>
+
+  </main>
+
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
