@@ -253,6 +253,143 @@ let state = {
     { name: '8. Nyaya & Kala (Peaceful Justice & Sacred Culture)', coverage: 100, steward: 'Ilankovan Nyaya Sabha', costToCitizen: 'Zero Court Fees • Resolved in 7 Days' }
   ],
 
+  // 6. TRI-TIER CIVIC TRIAGE & RESOLUTION ENGINE
+  // A. Major Incidents -> Voted by URGENCY (Severity x Time-Criticality)
+  majorIncidents: [
+    {
+      id: 'INC-01',
+      title: 'Flash Monsoon Embankment Breach Near South Paddy Canal',
+      ward: 'South Canal Ward 6',
+      steward: 'Vikramaditya Builders & Varuna Rescue Squad',
+      urgencyLevel: 'CRITICAL — SLA < 30 MINS',
+      urgencyScore: 9850,
+      citizensReporting: 640,
+      bountyPool: 350000,
+      karmaReward: 12500,
+      resolved: false
+    },
+    {
+      id: 'INC-02',
+      title: 'Transformer Lightning Surge on Primary Clinic Cold-Chain Line',
+      ward: 'Central Aarogya Ward 2',
+      steward: 'Karikalan Solar & Microgrid Rapid Team',
+      urgencyLevel: 'HIGH — SLA < 1 HOUR',
+      urgencyScore: 8420,
+      citizensReporting: 410,
+      bountyPool: 180000,
+      karmaReward: 7800,
+      resolved: false
+    },
+    {
+      id: 'INC-03',
+      title: 'Fallen Heritage Banyan Branch Blocking East Market Artery',
+      ward: 'East Market Ward 4',
+      steward: 'Selvi Karpagam Tree & Road Seva Guild',
+      urgencyLevel: 'MODERATE — SLA < 3 HOURS',
+      urgencyScore: 5190,
+      citizensReporting: 235,
+      bountyPool: 65000,
+      karmaReward: 3200,
+      resolved: false
+    }
+  ],
+
+  // B. Top Issues -> Voted by PRIORITY (P1 Critical -> P2 High -> P3 Medium)
+  topIssues: [
+    {
+      id: 'ISS-01',
+      title: 'Low Evening Water Pressure in Elevated North Hillock Homes',
+      category: 'Jalam (Water Distribution)',
+      priorityTier: 'P1 — HIGHEST PRIORITY',
+      priorityScore: 9140,
+      votes: 3420,
+      cost: 420000,
+      karmaReward: 6400,
+      addressed: false
+    },
+    {
+      id: 'ISS-02',
+      title: 'Monsoon Potholes & Drainage Silt Along Craft Weaver Lane',
+      category: 'Bhumi Seva (Roads & Stormwater)',
+      priorityTier: 'P1 — HIGHEST PRIORITY',
+      priorityScore: 8350,
+      votes: 2980,
+      cost: 310000,
+      karmaReward: 5100,
+      addressed: false
+    },
+    {
+      id: 'ISS-03',
+      title: 'Need Evening Solar Shuttle Carts for Elderly Attending Night Sabha',
+      category: 'Senior Mobility & Access',
+      priorityTier: 'P2 — HIGH PRIORITY',
+      priorityScore: 6720,
+      votes: 2410,
+      cost: 220000,
+      karmaReward: 3900,
+      addressed: false
+    },
+    {
+      id: 'ISS-04',
+      title: 'Acoustic Echo & Shade Sail Upgrade in Youth Gurukula Courtyard',
+      category: 'Vidyadana (School Facilities)',
+      priorityTier: 'P3 — STANDARD PRIORITY',
+      priorityScore: 4980,
+      votes: 1850,
+      cost: 140000,
+      karmaReward: 2600,
+      addressed: false
+    }
+  ],
+
+  // C. Top Problems -> Voted by MAJORITY (1-Citizen-1-Vote Headcount Consensus)
+  topProblems: [
+    {
+      id: 'PROB-01',
+      title: 'Eliminate 100% of Single-Use Plastic Packaging Across Town Markets',
+      rootCause: 'External plastic wrapper waste entering town compost & water channels',
+      solutionBlueprint: 'Replace with banana-leaf, terracotta & refundable steel tiffin containers via Artisan Guild',
+      yesVotes: 19450,
+      totalElectorate: 25000,
+      budget: 580000,
+      karmaReward: 9500,
+      solved: false
+    },
+    {
+      id: 'PROB-02',
+      title: 'Groundwater Depletion During Dry Summer Months (March–May)',
+      rootCause: 'Surface runoff escaping before recharging deep aquifers',
+      solutionBlueprint: 'Construct 40 interconnected check-dams, temple-tank recharge shafts & Miyawaki forest belts',
+      yesVotes: 17820,
+      totalElectorate: 25000,
+      budget: 920000,
+      karmaReward: 14800,
+      solved: false
+    },
+    {
+      id: 'PROB-03',
+      title: 'Post-Harvest Vegetable Spoilage Before Reaching Regional Cities',
+      rootCause: 'Lack of zero-cost solar cold rooms & value-added dehydration units',
+      solutionBlueprint: 'Build Cooperative Solar Cold-Storage & Sun-Drying Food Park at Town Hub',
+      yesVotes: 15640,
+      totalElectorate: 25000,
+      budget: 750000,
+      karmaReward: 11200,
+      solved: false
+    },
+    {
+      id: 'PROB-04',
+      title: 'Youth Leaving Villages for Repetitive Urban Call-Center Jobs',
+      rootCause: 'Lack of local high-tech AI, robotics & sovereign software cooperatives',
+      solutionBlueprint: 'Establish Town AI & Open-Hardware Guild paying global-grade dividends locally',
+      yesVotes: 11900,
+      totalElectorate: 25000,
+      budget: 680000,
+      karmaReward: 10400,
+      solved: false
+    }
+  ],
+
   chain: []
 };
 
@@ -307,7 +444,7 @@ function toggleLeftStrip() {
 }
 
 function switchSection(secId) {
-  const sections = ['overview', 'polls', 'boons', 'elections', 'dharma', 'necessities', 'explorer'];
+  const sections = ['overview', 'triage', 'polls', 'boons', 'elections', 'dharma', 'necessities', 'explorer'];
   sections.forEach(s => {
     const el = document.getElementById('sec-' + s);
     if (el) el.classList.toggle('hidden', s !== secId);
@@ -315,13 +452,14 @@ function switchSection(secId) {
     if (navBtn) navBtn.classList.toggle('active', s === secId);
   });
   const titles = {
-    overview: '1. DharmaLeaderboard & Anti-Hoarding Engine',
-    polls: '2. Daily Public Priority Polling (Direct Democracy)',
-    boons: '3. Top 10 Citizen Boons (Kalpavriksha Wishes)',
-    elections: '4. Universal Dharma Stewardship Council',
-    dharma: '5. Summon Karmic Genie (Mint Soulbound Fame)',
-    necessities: '6. Fresh Town 8 Basic Necessities (Ashta-Adhara)',
-    explorer: '7. Proof-of-Dharma SHA-256 Block Explorer'
+    overview: '1. Dharma Leaderboard & Anti-Hoarding Engine',
+    triage: '2. Civic Triage: Incidents (Urgency) • Issues (Priority) • Problems (Majority)',
+    polls: '3. Daily Public Priority Polling (Direct Democracy)',
+    boons: '4. Top 10 Citizen Boons (Kalpavriksha Wishes)',
+    elections: '5. Universal Dharma Stewardship Council',
+    dharma: '6. Summon Karmic Genie (Mint Soulbound Fame)',
+    necessities: '7. Fresh Town 8 Basic Necessities (Ashta-Adhara)',
+    explorer: '8. Proof-of-Dharma SHA-256 Block Explorer'
   };
   const crumb = document.getElementById('currentSectionCrumb');
   if (crumb && titles[secId]) crumb.textContent = titles[secId];
@@ -554,6 +692,160 @@ async function executeDharmaAct() {
 }
 
 // =========================================================================
+// 6. TRI-TIER CIVIC TRIAGE ACTIONS (INCIDENTS -> URGENCY, ISSUES -> PRIORITY, PROBLEMS -> MAJORITY)
+// =========================================================================
+
+// A. Major Incidents (Voted by URGENCY)
+async function voteIncidentUrgency(incId) {
+  const inc = state.majorIncidents.find(i => i.id === incId);
+  if (!inc || inc.resolved) return;
+  inc.citizensReporting += 45;
+  inc.urgencyScore += 620;
+  state.majorIncidents.sort((a, b) => (a.resolved - b.resolved) || (b.urgencyScore - a.urgencyScore));
+  await recordBlock('INCIDENT_URGENCY_VOTE', 'Emergency Citizen Signal', `Escalated Urgency (${inc.urgencyScore}): "${inc.title}"`, 0, 90);
+}
+
+async function dispatchTopIncidentResponse(incId) {
+  const inc = state.majorIncidents.find(i => i.id === incId);
+  if (!inc || inc.resolved) return;
+  if (state.commonsPool < inc.bountyPool) {
+    alert('Insufficient Commons Pool — run Anti-Hoarding Demurrage or Dāna to replenish emergency reserve!');
+    return;
+  }
+  state.commonsPool -= inc.bountyPool;
+  inc.resolved = true;
+
+  // Reward the lead steward's Karma
+  const leadCitizen = state.citizens[0];
+  leadCitizen.karma += inc.karmaReward;
+  leadCitizen.sevaHours += 12;
+  leadCitizen.lastDeed = `Resolved Major Incident (${inc.urgencyLevel}): ${inc.title}`;
+
+  await recordBlock('INCIDENT_RESOLVED_SLA', inc.steward, `Emergency Dispatched & Resolved: "${inc.title}"`, inc.bountyPool, inc.karmaReward);
+}
+
+async function reportMajorIncident() {
+  const titleEl = document.getElementById('new-inc-title');
+  const wardEl = document.getElementById('new-inc-ward');
+  const slaEl = document.getElementById('new-inc-sla');
+  const title = titleEl.value.trim();
+  if (!title) return;
+
+  state.majorIncidents.unshift({
+    id: 'INC-0' + (state.majorIncidents.length + 1),
+    title,
+    ward: wardEl.value.trim() || 'Central Ward 1',
+    steward: 'Rapid Dharma Seva Force',
+    urgencyLevel: slaEl.value,
+    urgencyScore: slaEl.value.includes('CRITICAL') ? 9950 : 7500,
+    citizensReporting: 180,
+    bountyPool: 200000,
+    karmaReward: 8500,
+    resolved: false
+  });
+  titleEl.value = '';
+  await recordBlock('MAJOR_INCIDENT_REPORTED', 'Citizen Emergency Alert', `Reported Major Incident (${slaEl.value}): "${title}"`, 200000, 300);
+}
+
+// B. Top Issues (Voted by PRIORITY: P1 -> P2 -> P3)
+async function voteIssuePriority(issId, boostAmount) {
+  const iss = state.topIssues.find(i => i.id === issId);
+  if (!iss || iss.addressed) return;
+  iss.votes += 130;
+  iss.priorityScore += boostAmount;
+  if (iss.priorityScore >= 8000) iss.priorityTier = 'P1 — HIGHEST PRIORITY';
+  else if (iss.priorityScore >= 6000) iss.priorityTier = 'P2 — HIGH PRIORITY';
+  state.topIssues.sort((a, b) => (a.addressed - b.addressed) || (b.priorityScore - a.priorityScore));
+  await recordBlock('ISSUE_PRIORITY_VOTE', 'Citizen Priority Matrix', `Voted Priority (${iss.priorityTier}) for Issue: "${iss.title}"`, 0, 110);
+}
+
+async function addressTopPriorityIssue(issId) {
+  const iss = state.topIssues.find(i => i.id === issId);
+  if (!iss || iss.addressed) return;
+  if (state.commonsPool < iss.cost) {
+    alert('Insufficient Commons Pool — run Anti-Hoarding Demurrage or Dāna first!');
+    return;
+  }
+  state.commonsPool -= iss.cost;
+  iss.addressed = true;
+  await recordBlock('TOP_ISSUE_ADDRESSED', 'Priority Civic Squad', `Addressed ${iss.priorityTier} Issue: "${iss.title}"`, iss.cost, iss.karmaReward);
+}
+
+async function submitNewIssue() {
+  const titleEl = document.getElementById('new-iss-title');
+  const catEl = document.getElementById('new-iss-cat');
+  const prioEl = document.getElementById('new-iss-prio');
+  const title = titleEl.value.trim();
+  if (!title) return;
+
+  const scoreMap = { 'P1 — HIGHEST PRIORITY': 8800, 'P2 — HIGH PRIORITY': 6900, 'P3 — STANDARD PRIORITY': 5100 };
+  state.topIssues.push({
+    id: 'ISS-0' + (state.topIssues.length + 1),
+    title,
+    category: catEl.value,
+    priorityTier: prioEl.value,
+    priorityScore: scoreMap[prioEl.value] || 6500,
+    votes: 950,
+    cost: 260000,
+    karmaReward: 4500,
+    addressed: false
+  });
+  state.topIssues.sort((a, b) => (a.addressed - b.addressed) || (b.priorityScore - a.priorityScore));
+  titleEl.value = '';
+  await recordBlock('NEW_ISSUE_LOGGED', 'Citizen Priority Queue', `Logged ${prioEl.value} Issue: "${title}"`, 260000, 200);
+}
+
+// C. Top Problems (Voted by MAJORITY: 1-Citizen-1-Vote >50% Mandate)
+async function voteProblemMajority(probId) {
+  const prob = state.topProblems.find(p => p.id === probId);
+  if (!prob || prob.solved) return;
+  prob.yesVotes = Math.min(prob.totalElectorate, prob.yesVotes + 850);
+  state.topProblems.sort((a, b) => (a.solved - b.solved) || (b.yesVotes - a.yesVotes));
+  const pct = ((prob.yesVotes / prob.totalElectorate) * 100).toFixed(1);
+  await recordBlock('PROBLEM_MAJORITY_VOTE', 'Town Majority Referendum', `Majority Vote (${pct}% Mandate) for Problem: "${prob.title}"`, 0, 150);
+}
+
+async function solveMajorityProblem(probId) {
+  const prob = state.topProblems.find(p => p.id === probId);
+  if (!prob || prob.solved) return;
+  const majorityPct = (prob.yesVotes / prob.totalElectorate) * 100;
+  if (majorityPct < 50) {
+    alert(`MAJORITY LOCK: This structural problem currently has ${majorityPct.toFixed(1)}% support. Vote it above >50% majority mandate to unlock automatic Commons execution!`);
+    return;
+  }
+  if (state.commonsPool < prob.budget) {
+    alert('Insufficient Commons Pool — run Anti-Hoarding Demurrage or Dāna first!');
+    return;
+  }
+  state.commonsPool -= prob.budget;
+  prob.solved = true;
+  await recordBlock('MAJORITY_PROBLEM_SOLVED', 'Town Structural Reform Sabha', `Executed Majority Mandate (${majorityPct.toFixed(1)}%): "${prob.title}"`, prob.budget, prob.karmaReward);
+}
+
+async function proposeStructuralProblem() {
+  const titleEl = document.getElementById('new-prob-title');
+  const blueprintEl = document.getElementById('new-prob-blueprint');
+  const title = titleEl.value.trim();
+  if (!title) return;
+
+  state.topProblems.push({
+    id: 'PROB-0' + (state.topProblems.length + 1),
+    title,
+    rootCause: 'Citizen-identified systemic bottleneck',
+    solutionBlueprint: blueprintEl.value.trim() || '100% Cooperative Dharma Commons Replacement',
+    yesVotes: 13200,
+    totalElectorate: 25000,
+    budget: 640000,
+    karmaReward: 9800,
+    solved: false
+  });
+  state.topProblems.sort((a, b) => (a.solved - b.solved) || (b.yesVotes - a.yesVotes));
+  titleEl.value = '';
+  blueprintEl.value = '';
+  await recordBlock('NEW_PROBLEM_REFERENDUM', 'Citizen Majority Ballot', `Opened Majority Referendum: "${title}"`, 640000, 250);
+}
+
+// =========================================================================
 // MASTER RENDER
 // =========================================================================
 function renderAll() {
@@ -748,6 +1040,130 @@ function renderAll() {
         <div class="text-xs text-emerald-400 font-semibold mt-1">${n.costToCitizen}</div>
       </div>
     `).join('');
+  }
+
+  // 6B. Render Tri-Tier Civic Triage (Major Incidents -> Urgency, Top Issues -> Priority, Top Problems -> Majority)
+  const incEl = document.getElementById('incidents-list');
+  if (incEl) {
+    const maxUrgency = Math.max(...state.majorIncidents.map(i => i.urgencyScore), 1);
+    incEl.innerHTML = state.majorIncidents.map((inc, idx) => {
+      const pct = Math.min(100, Math.round((inc.urgencyScore / maxUrgency) * 100));
+      const badgeCls = inc.resolved
+        ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+        : (inc.urgencyLevel.includes('CRITICAL') ? 'bg-red-500 text-white' : 'bg-amber-500 text-black');
+
+      return `
+        <div class="gkd-card ${!inc.resolved && idx === 0 ? 'border-red-500/70' : ''}" style="padding:15px;">
+          <div class="flex items-center justify-between gap-2 mb-1.5">
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full border ${badgeCls}">
+              ${inc.resolved ? 'INCIDENT RESOLVED ✓' : inc.urgencyLevel}
+            </span>
+            <span class="text-xs font-mono text-red-400 font-bold">Urgency Index: ${inc.urgencyScore.toLocaleString()}</span>
+          </div>
+          <h4 class="text-sm font-bold text-white">${inc.title}</h4>
+          <div class="text-xs text-slate-400 mt-1">Ward: <span class="text-slate-200">${inc.ward}</span> • Lead: <span class="text-teal-300">${inc.steward}</span></div>
+          <div class="progress-bar-bg my-2.5">
+            <div class="progress-bar-fill" style="width:${pct}%; background: linear-gradient(90deg, #ef4444 0%, #f59e0b 100%);"></div>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+            <div>
+              <span class="text-slate-300"><strong>${inc.citizensReporting}</strong> Alerts</span> •
+              <span class="text-amber-400 font-bold">+${inc.karmaReward.toLocaleString()} Karma</span>
+            </div>
+            <div class="flex gap-1.5">
+              ${!inc.resolved ? `
+                <button onclick="voteIncidentUrgency('${inc.id}')" class="btn-teal py-1 px-2.5 text-xs">
+                  + Vote Urgency
+                </button>
+                <button onclick="dispatchTopIncidentResponse('${inc.id}')" class="btn-gold py-1 px-2.5 text-xs">
+                  Dispatch (${fmtINR(inc.bountyPool)})
+                </button>
+              ` : `<span class="text-emerald-400 font-bold">SLA Verified On-Chain ✓</span>`}
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  const issEl = document.getElementById('issues-list');
+  if (issEl) {
+    const maxPrio = Math.max(...state.topIssues.map(i => i.priorityScore), 1);
+    issEl.innerHTML = state.topIssues.map((iss, idx) => {
+      const pct = Math.min(100, Math.round((iss.priorityScore / maxPrio) * 100));
+      const badgeCls = iss.addressed
+        ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+        : (iss.priorityTier.startsWith('P1') ? 'bg-amber-500 text-black' : 'bg-sky-500/20 text-sky-300 border-sky-500/40');
+
+      return `
+        <div class="gkd-card ${!iss.addressed && idx === 0 ? 'gold-border' : ''}" style="padding:15px;">
+          <div class="flex items-center justify-between gap-2 mb-1.5">
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full border ${badgeCls}">
+              ${iss.addressed ? 'ISSUE ADDRESSED ✓' : iss.priorityTier}
+            </span>
+            <span class="text-xs font-mono text-amber-400 font-bold">Priority Score: ${iss.priorityScore.toLocaleString()}</span>
+          </div>
+          <h4 class="text-sm font-bold text-white">${iss.title}</h4>
+          <div class="text-xs text-slate-400 mt-1">${iss.category} • <strong>${iss.votes.toLocaleString()}</strong> Priority Votes</div>
+          <div class="progress-bar-bg my-2.5">
+            <div class="progress-bar-fill" style="width:${pct}%"></div>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+            <div class="text-amber-400 font-bold">Reward: +${iss.karmaReward.toLocaleString()} Karma</div>
+            <div class="flex gap-1.5">
+              ${!iss.addressed ? `
+                <button onclick="voteIssuePriority('${iss.id}', 550)" class="btn-teal py-1 px-2.5 text-xs">
+                  + Boost Priority
+                </button>
+                <button onclick="addressTopPriorityIssue('${iss.id}')" class="btn-gold py-1 px-2.5 text-xs">
+                  Fix Issue (${fmtINR(iss.cost)})
+                </button>
+              ` : `<span class="text-emerald-400 font-bold">Resolved ✓</span>`}
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  const probEl = document.getElementById('problems-list');
+  if (probEl) {
+    probEl.innerHTML = state.topProblems.map((prob, idx) => {
+      const majorityPct = Math.min(100, Math.round((prob.yesVotes / prob.totalElectorate) * 1000) / 10);
+      const hasMajority = majorityPct >= 50.0;
+      const badgeCls = prob.solved
+        ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+        : (hasMajority ? 'bg-teal-500 text-black font-extrabold' : 'bg-slate-800 text-slate-300');
+
+      return `
+        <div class="gkd-card ${!prob.solved && idx === 0 ? 'gold-border' : ''}" style="padding:15px;">
+          <div class="flex items-center justify-between gap-2 mb-1.5">
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full border ${badgeCls}">
+              ${prob.solved ? 'STRUCTURAL PROBLEM SOLVED ✓' : (hasMajority ? `MAJORITY MANDATE (${majorityPct}%)` : `POLLING (${majorityPct}% / 50%)`)}
+            </span>
+            <span class="text-xs font-mono text-teal-300 font-bold">${prob.yesVotes.toLocaleString()} / ${prob.totalElectorate.toLocaleString()} Citizens</span>
+          </div>
+          <h4 class="text-sm font-bold text-white">${prob.title}</h4>
+          <div class="text-xs text-slate-400 mt-1"><strong>Root Solution:</strong> <span class="text-slate-200">${prob.solutionBlueprint}</span></div>
+          <div class="progress-bar-bg my-2.5">
+            <div class="progress-bar-fill" style="width:${majorityPct}%; background: linear-gradient(90deg, #10b981 0%, #2dd4bf 100%);"></div>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+            <div class="text-amber-400 font-bold">+${prob.karmaReward.toLocaleString()} Karma</div>
+            <div class="flex gap-1.5">
+              ${!prob.solved ? `
+                <button onclick="voteProblemMajority('${prob.id}')" class="btn-teal py-1 px-2.5 text-xs">
+                  + Vote Majority
+                </button>
+                <button onclick="solveMajorityProblem('${prob.id}')" class="btn-gold py-1 px-2.5 text-xs">
+                  Execute Reform (${fmtINR(prob.budget)})
+                </button>
+              ` : `<span class="text-emerald-400 font-bold">Mandate Enacted ✓</span>`}
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
   }
 
   // 7. Render Block Explorer
