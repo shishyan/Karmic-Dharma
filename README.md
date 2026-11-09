@@ -1,4 +1,4 @@
-# 🧞‍♂️ Karmic Genie (`Dharma-Driven Open Ledger`)
+# 🧞‍♂️ Karmic Dharma (`Dharma-Driven Open Ledger`)
 
 > **"In the Old Economy, status came from how much you hoarded. In the Karmic Genie Economy, status, fame, and civic privilege come ONLY from how much you give away and how much verified Dharma you perform."**
 
